@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'auth/firebase_user_provider.dart';
-import 'package:map_l/maplife/maplife_widget.dart';
+import 'package:map_l/phone_login/phone_login_widget.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
 import 'home_page/home_page_widget.dart';
 import 'location_map/location_map_widget.dart';
@@ -36,14 +36,18 @@ class _MyAppState extends State<MyApp> {
       title: 'MapL',
       theme: ThemeData(primarySwatch: Colors.blue),
       home: initialUser == null
-          ? const Center(
-              child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(Color(0xff4b39ef)),
+          ? Center(
+              child: Builder(
+                builder: (context) => Image.asset(
+                  'assets/images/MaplifeLogo.png',
+                  width: MediaQuery.of(context).size.width / 2,
+                  fit: BoxFit.fitWidth,
+                ),
               ),
             )
           : currentUser.loggedIn
               ? NavBarPage()
-              : MaplifeWidget(),
+              : PhoneLoginWidget(),
     );
   }
 }

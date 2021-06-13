@@ -1,20 +1,22 @@
 import '../auth/auth_util.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
+import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../main.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class MaplifeWidget extends StatefulWidget {
-  MaplifeWidget({Key key}) : super(key: key);
+class LoginWidget extends StatefulWidget {
+  LoginWidget({Key key}) : super(key: key);
 
   @override
-  _MaplifeWidgetState createState() => _MaplifeWidgetState();
+  _LoginWidgetState createState() => _LoginWidgetState();
 }
 
-class _MaplifeWidgetState extends State<MaplifeWidget> {
+class _LoginWidgetState extends State<LoginWidget> {
   TextEditingController emailTextController;
   TextEditingController passwordTextController;
+  bool passwordVisibility;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -22,6 +24,7 @@ class _MaplifeWidgetState extends State<MaplifeWidget> {
     super.initState();
     emailTextController = TextEditingController();
     passwordTextController = TextEditingController();
+    passwordVisibility = false;
   }
 
   @override
@@ -33,16 +36,15 @@ class _MaplifeWidgetState extends State<MaplifeWidget> {
           width: double.infinity,
           height: double.infinity,
           decoration: BoxDecoration(
-            color: Color(0xFF110631),
+            color: Colors.white,
           ),
           child: Stack(
             children: [
               Align(
-                alignment: Alignment(0.06, -0.63),
-                child: Image.network(
-                  'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/flutterflow_assets/ff_full_logo_light.png',
-                  width: 280,
-                  height: 100,
+                alignment: Alignment(0.06, -0.8),
+                child: Image.asset(
+                  'assets/images/MaplifeLogo.png',
+                  width: double.infinity,
                   fit: BoxFit.contain,
                 ),
               ),
@@ -70,12 +72,12 @@ class _MaplifeWidgetState extends State<MaplifeWidget> {
                                     hintText: 'Username',
                                     hintStyle: GoogleFonts.getFont(
                                       'Lato',
-                                      color: Colors.white,
+                                      color: Color(0xFF2AAAE2),
                                       fontSize: 18,
                                     ),
                                     enabledBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(
-                                        color: Color(0xFF3C2452),
+                                        color: Color(0xFF2AAAE2),
                                         width: 2,
                                       ),
                                       borderRadius: const BorderRadius.only(
@@ -85,7 +87,7 @@ class _MaplifeWidgetState extends State<MaplifeWidget> {
                                     ),
                                     focusedBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(
-                                        color: Color(0xFF3C2452),
+                                        color: Color(0xFF2AAAE2),
                                         width: 2,
                                       ),
                                       borderRadius: const BorderRadius.only(
@@ -96,7 +98,7 @@ class _MaplifeWidgetState extends State<MaplifeWidget> {
                                   ),
                                   style: GoogleFonts.getFont(
                                     'Lato',
-                                    color: Colors.white,
+                                    color: Color(0xFF2AAAE2),
                                     fontSize: 18,
                                   ),
                                 ),
@@ -124,17 +126,17 @@ class _MaplifeWidgetState extends State<MaplifeWidget> {
                                 alignment: Alignment(0, 0),
                                 child: TextFormField(
                                   controller: passwordTextController,
-                                  obscureText: true,
+                                  obscureText: !passwordVisibility,
                                   decoration: InputDecoration(
                                     hintText: 'Password',
                                     hintStyle: GoogleFonts.getFont(
                                       'Lato',
-                                      color: Colors.white,
+                                      color: Color(0xFF2AAAE2),
                                       fontSize: 18,
                                     ),
                                     enabledBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(
-                                        color: Color(0xFF3C2452),
+                                        color: Color(0xFF2AAAE2),
                                         width: 2,
                                       ),
                                       borderRadius: const BorderRadius.only(
@@ -144,7 +146,7 @@ class _MaplifeWidgetState extends State<MaplifeWidget> {
                                     ),
                                     focusedBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(
-                                        color: Color(0xFF3C2452),
+                                        color: Color(0xFF2AAAE2),
                                         width: 2,
                                       ),
                                       borderRadius: const BorderRadius.only(
@@ -152,10 +154,22 @@ class _MaplifeWidgetState extends State<MaplifeWidget> {
                                         topRight: Radius.circular(4.0),
                                       ),
                                     ),
+                                    suffixIcon: InkWell(
+                                      onTap: () => setState(
+                                        () => passwordVisibility =
+                                            !passwordVisibility,
+                                      ),
+                                      child: Icon(
+                                        passwordVisibility
+                                            ? Icons.visibility_outlined
+                                            : Icons.visibility_off_outlined,
+                                        size: 22,
+                                      ),
+                                    ),
                                   ),
                                   style: GoogleFonts.getFont(
                                     'Lato',
-                                    color: Colors.white,
+                                    color: Color(0xFF2AAAE2),
                                     fontSize: 18,
                                   ),
                                 ),
@@ -205,12 +219,12 @@ class _MaplifeWidgetState extends State<MaplifeWidget> {
                                 color: Color(0x00FFFFFF),
                                 textStyle: GoogleFonts.getFont(
                                   'Lato',
-                                  color: Colors.white,
+                                  color: Color(0xFF2AAAE2),
                                   fontWeight: FontWeight.bold,
                                   fontSize: 15,
                                 ),
                                 borderSide: BorderSide(
-                                  color: Color(0xFF553BBA),
+                                  color: Color(0xFF2AAAE2),
                                   width: 2,
                                 ),
                                 borderRadius: 0,
@@ -245,12 +259,12 @@ class _MaplifeWidgetState extends State<MaplifeWidget> {
                                   color: Color(0x00FFFFFF),
                                   textStyle: GoogleFonts.getFont(
                                     'Lato',
-                                    color: Colors.white,
+                                    color: Color(0xFF2AAAE2),
                                     fontWeight: FontWeight.bold,
                                     fontSize: 15,
                                   ),
                                   borderSide: BorderSide(
-                                    color: Color(0xFF553BBA),
+                                    color: Color(0xFF2AAAE2),
                                     width: 2,
                                   ),
                                   borderRadius: 0,

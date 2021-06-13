@@ -1,4 +1,5 @@
 import '../flutter_flow/flutter_flow_theme.dart';
+import '../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -16,15 +17,14 @@ class _HomePageWidgetState extends State<HomePageWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(25),
-        child: AppBar(
-          backgroundColor: FlutterFlowTheme.primaryColor,
-          automaticallyImplyLeading: false,
-          actions: [],
-          elevation: 2,
-        ),
+      appBar: AppBar(
+        backgroundColor: FlutterFlowTheme.primaryColor,
+        automaticallyImplyLeading: true,
+        actions: [],
+        centerTitle: true,
+        elevation: 4,
       ),
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Image.asset(
           'assets/images/MaplifeLogo.png',

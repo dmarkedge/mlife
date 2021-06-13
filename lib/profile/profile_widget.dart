@@ -1,5 +1,7 @@
 import '../auth/auth_util.dart';
+import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
+import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -18,6 +20,13 @@ class _ProfileWidgetState extends State<ProfileWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
+      appBar: AppBar(
+        backgroundColor: FlutterFlowTheme.primaryColor,
+        automaticallyImplyLeading: true,
+        actions: [],
+        centerTitle: true,
+        elevation: 4,
+      ),
       body: SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.max,
@@ -75,15 +84,40 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
-                            child: Text(
-                              currentUserDisplayName,
-                              style: FlutterFlowTheme.title1.override(
-                                fontFamily: 'Poppins',
-                                color: Colors.white,
-                              ),
+                          StreamBuilder<List<UsersRecord>>(
+                            stream: queryUsersRecord(
+                              queryBuilder: (usersRecord) => usersRecord.where(
+                                  'display_name',
+                                  isEqualTo: currentUserDisplayName),
+                              singleRecord: true,
                             ),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return Center(
+                                    child: CircularProgressIndicator());
+                              }
+                              List<UsersRecord> textUsersRecordList =
+                                  snapshot.data;
+                              // Customize what your widget looks like with no query results.
+                              if (snapshot.data.isEmpty) {
+                                // return Container();
+                                // For now, we'll just include some dummy data.
+                                textUsersRecordList =
+                                    createDummyUsersRecord(count: 1);
+                              }
+                              final textUsersRecord = textUsersRecordList.first;
+                              return Padding(
+                                padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
+                                child: Text(
+                                  currentUserDisplayName,
+                                  style: FlutterFlowTheme.title1.override(
+                                    fontFamily: 'Poppins',
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              );
+                            },
                           )
                         ],
                       ),
@@ -319,6 +353,31 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                         )
                       ],
                     ),
+                  ),
+                  StreamBuilder<List<TestRecord>>(
+                    stream: queryTestRecord(
+                      singleRecord: true,
+                    ),
+                    builder: (context, snapshot) {
+                      // Customize what your widget looks like when it's loading.
+                      if (!snapshot.hasData) {
+                        return Center(child: CircularProgressIndicator());
+                      }
+                      List<TestRecord> textTestRecordList = snapshot.data;
+                      // Customize what your widget looks like with no query results.
+                      if (snapshot.data.isEmpty) {
+                        // return Container();
+                        // For now, we'll just include some dummy data.
+                        textTestRecordList = createDummyTestRecord(count: 1);
+                      }
+                      final textTestRecord = textTestRecordList.first;
+                      return Text(
+                        dateTimeFormat('jm', getCurrentTimestamp),
+                        style: FlutterFlowTheme.bodyText1.override(
+                          fontFamily: 'Poppins',
+                        ),
+                      );
+                    },
                   )
                 ],
               ),
