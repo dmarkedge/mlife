@@ -6,6 +6,7 @@ import 'package:latlong/latlong.dart';
 
 import 'users_record.dart';
 import 'test_record.dart';
+import 'profile_images_record.dart';
 
 part 'serializers.g.dart';
 
@@ -14,6 +15,7 @@ const kDocumentReferenceField = 'Document__Reference__Field';
 @SerializersFor(const [
   UsersRecord,
   TestRecord,
+  ProfileImagesRecord,
 ])
 final Serializers serializers = (_$serializers.toBuilder()
       ..add(DocumentReferenceSerializer())

@@ -6,12 +6,14 @@ import '../flutter_flow/flutter_flow_util.dart';
 
 import 'schema/users_record.dart';
 import 'schema/test_record.dart';
+import 'schema/profile_images_record.dart';
 import 'schema/serializers.dart';
 
 export 'package:cloud_firestore/cloud_firestore.dart';
 export 'schema/serializers.dart';
 export 'schema/users_record.dart';
 export 'schema/test_record.dart';
+export 'schema/profile_images_record.dart';
 
 Stream<List<UsersRecord>> queryUsersRecord(
         {Query Function(Query) queryBuilder,
@@ -25,6 +27,14 @@ Stream<List<TestRecord>> queryTestRecord(
         int limit = -1,
         bool singleRecord = false}) =>
     queryCollection(TestRecord.collection, TestRecord.serializer,
+        queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
+
+Stream<List<ProfileImagesRecord>> queryProfileImagesRecord(
+        {Query Function(Query) queryBuilder,
+        int limit = -1,
+        bool singleRecord = false}) =>
+    queryCollection(
+        ProfileImagesRecord.collection, ProfileImagesRecord.serializer,
         queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
 
 Stream<List<T>> queryCollection<T>(

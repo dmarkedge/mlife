@@ -51,11 +51,38 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               children: [
                                 Align(
                                   alignment: Alignment(0, 0),
-                                  child: Image.asset(
-                                    'assets/images/ui_hero_2@2x.png',
-                                    width: MediaQuery.of(context).size.width,
-                                    height: 150,
-                                    fit: BoxFit.cover,
+                                  child:
+                                      StreamBuilder<List<ProfileImagesRecord>>(
+                                    stream: queryProfileImagesRecord(
+                                      singleRecord: true,
+                                    ),
+                                    builder: (context, snapshot) {
+                                      // Customize what your widget looks like when it's loading.
+                                      if (!snapshot.hasData) {
+                                        return Center(
+                                            child: CircularProgressIndicator());
+                                      }
+                                      List<ProfileImagesRecord>
+                                          imageProfileImagesRecordList =
+                                          snapshot.data;
+                                      // Customize what your widget looks like with no query results.
+                                      if (snapshot.data.isEmpty) {
+                                        // return Container();
+                                        // For now, we'll just include some dummy data.
+                                        imageProfileImagesRecordList =
+                                            createDummyProfileImagesRecord(
+                                                count: 1);
+                                      }
+                                      final imageProfileImagesRecord =
+                                          imageProfileImagesRecordList.first;
+                                      return Image.network(
+                                        '',
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        height: 150,
+                                        fit: BoxFit.cover,
+                                      );
+                                    },
                                   ),
                                 ),
                                 Align(
@@ -353,31 +380,6 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                         )
                       ],
                     ),
-                  ),
-                  StreamBuilder<List<TestRecord>>(
-                    stream: queryTestRecord(
-                      singleRecord: true,
-                    ),
-                    builder: (context, snapshot) {
-                      // Customize what your widget looks like when it's loading.
-                      if (!snapshot.hasData) {
-                        return Center(child: CircularProgressIndicator());
-                      }
-                      List<TestRecord> textTestRecordList = snapshot.data;
-                      // Customize what your widget looks like with no query results.
-                      if (snapshot.data.isEmpty) {
-                        // return Container();
-                        // For now, we'll just include some dummy data.
-                        textTestRecordList = createDummyTestRecord(count: 1);
-                      }
-                      final textTestRecord = textTestRecordList.first;
-                      return Text(
-                        dateTimeFormat('jm', getCurrentTimestamp),
-                        style: FlutterFlowTheme.bodyText1.override(
-                          fontFamily: 'Poppins',
-                        ),
-                      );
-                    },
                   )
                 ],
               ),
